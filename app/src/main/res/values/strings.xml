@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Routine</string>
+    <string name="repeat_start">Start</string>
+    <string name="repeat_finish">Finish</string>
+    <string name="repeat_interval">Interval</string>
+    <string name="set_interval_time">Set interval time</string>
+    <string name="set_start_time">Set start time</string>
+    <string name="set_finish_time">Set finish time</string>
+    <!--<string name="time_format">%1$02d:%2$02d</string>-->
+    <!--<string name="btn_done_label">Done</string>-->
+
+    <string name="msg_please_enter_start_time_first">Please enter start time first</string>
+    <string name="msg_start_time_must_be_less_than_finish_time">Start time must be less than finish time</string>
+    <string name="msg_finish_time_must_be_greater_than_start_time">Finish time must greater than start time</string>
+    <string name="msg_interval_must_be_greater_than_0">Interval must be greater than 0</string>
+
+    <string name="label_repeat">Repeat</string>
+    <string name="label_monday">MO</string>
+    <string name="label_tuesday">TU</string>
+    <string name="label_wednesday">WE</string>
+    <string name="label_thursday">TH</string>
+    <string name="label_friday">FR</string>
+    <string name="label_saturday">SA</string>
+    <string name="label_sunday">SU</string>
+    <string name="label_notify">Notify</string>
+    <string name="label_todo">Todo</string>
+    <string name="msg_the_periods_dont_allow_overlap">The periods don\'t allow overlap</string>
+    <string name="label_mode">Mode</string>
+    <string name="label_mode_open_app">Open Routine</string>
+    <string name="label_mode_push_notification">Push notification</string>
+    <string name="msg_please_enter_what_to_do_first">Please enter what to do first</string>
+    <string name="hint_tile">Title</string>
+    <string name="hint_note">Note</string>
+    <string name="msg_please_enter_title">Please enter title</string>
+    <string name="msg_could_not_save_task">Something wrong! Couldn\'t save this task</string>
+    <string name="msg_save_task_successful">Saved</string>
+    <string name="disable">O</string>
+    <string name="enable">I</string>
+    <string name="create_new_task">Create new task</string>
+    <string name="button_save_label">Save</string>
+    <string name="button_cancel_label">Cancel</string>
+    <string name="dismiss_this_task">Dismiss this task</string>
+    <string name="menu_edit_task">Edit</string>
+    <string name="menu_delete_this_task">Delete</string>
+    <string name="delete_dialog_title">Delete</string>
+    <string name="confirm_delete_message">Do you want to delete this task</string>
+    <string name="positive_button_label">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="content_share">Download at: https://play.google.com/store/apps/details?id=vn.hcmut.routine</string>
+    <string name="title_share">Routine application</string>
+</resources>

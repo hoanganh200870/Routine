@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_other"
+                android:hint="@string/hint_tile"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/txtNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_other"
+                android:gravity="top"
+                android:hint="@string/hint_note"
+                android:lines="3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_partner"
+                android:text="@string/label_mode"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rgMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_other"
+                android:checkedButton="@+id/radioPushNotification"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioPushNotification"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/label_mode_push_notification" />
+
+                <RadioButton
+                    android:id="@+id/radioOpenApp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/label_mode_open_app" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_partner"
+                android:text="@string/label_repeat"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/groupDayRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_other"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_monday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_tuesday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_wednesday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_thursday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_friday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_saturday" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/day_no_select_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/label_sunday" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_partner"
+                android:text="@string/label_notify"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/lvRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_bottom_with_other"
+                android:transcriptMode="disabled"></ListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_bottom_with_partner"
+                android:text="@string/label_todo"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/lvTodo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:transcriptMode="disabled"></ListView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/control_background"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/button_cancel_label"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/button_save_label"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

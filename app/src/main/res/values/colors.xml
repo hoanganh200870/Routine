@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="control_background">#D3D3D3</color>
+    <color name="background_color">#33B5E5</color>
+    <color name="button_background">#B4B4B4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="day_background_select">#B4B4B4</color>
+    <color name="day_background">#3FB2FF</color>
+</resources>
