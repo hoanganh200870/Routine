@@ -1,7 +1,7 @@
 # Routine
 Project for Android App Development - Udacity course
 
-# Project typ
+# Project type
 Android project
 
 # IDE
