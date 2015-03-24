@@ -32,8 +32,10 @@ import java.util.List;
 
 import vn.hcmut.routine.R;
 import vn.hcmut.routine.adapter.RepeatAdapter;
+import vn.hcmut.routine.adapter.RoutineSyncAdapter;
 import vn.hcmut.routine.adapter.TodoAdapter;
 import vn.hcmut.routine.database.RoutineContract;
+import vn.hcmut.routine.database.RoutineDbHelper;
 import vn.hcmut.routine.model.RepeatItem;
 import vn.hcmut.routine.model.TaskItem;
 import vn.hcmut.routine.model.TimeItem;
@@ -411,58 +413,13 @@ public class TaskScreen extends Activity implements LoaderManager.LoaderCallback
                 boolean notify = rgMode.getCheckedRadioButtonId() == R.id.radioPushNotification;
                 TaskItem task = new TaskItem(title, note, notify, dailyData, repeatData, todoData, true);
 
-                ContentResolver contentResolver = getContentResolver();
-                boolean success = false;
-
-                long newTaskId;
-                ContentValues taskValues = task.getValues();
-                if (taskId != -1) {
-                    String where = RoutineContract.TaskEntry._ID + " = ? ";
-                    Uri uri = RoutineContract.TaskEntry.getTaskUri(taskId);
-                    String[] args = {String.valueOf(taskId)};
-                    int i = contentResolver.update(uri, taskValues, where, args);
-                    Log.e("Update", "Task " + taskId + "-" + i);
-                    newTaskId = taskId;
-                } else {
-                    Uri taskUri = contentResolver.insert(RoutineContract.TaskEntry.CONTENT_URI, taskValues);
-                    newTaskId = ContentUris.parseId(taskUri);
-                }
-
+                long newTaskId = RoutineDbHelper.saveTask(this, task, taskId);
                 if (newTaskId != -1) {
-                    long dailyId = -1;
-                    ContentValues dailyValues = task.getDailyValues(newTaskId);
-                    if (taskId == -1) {
-                        Uri dailyUri = contentResolver.insert(RoutineContract.DailyEntry.CONTENT_URI, dailyValues);
-                        dailyId = ContentUris.parseId(dailyUri);
-                    } else {
-                        Uri uri = RoutineContract.DailyEntry.getDailyUri(newTaskId);
-                        String where = RoutineContract.DailyEntry.COLUMN_TASK_ID + " = ? ";
-                        String[] args = new String[]{String.valueOf(newTaskId)};
-                        int i = contentResolver.update(uri, dailyValues, where, args);
-                        Log.e("Update", "Daily " + newTaskId + "-" + i);
-                    }
-
-                    ContentValues[] repeatValues = task.getRepeatValues(newTaskId);
-                    Uri repeatUri = RoutineContract.TaskEntry.getRepeatUri(newTaskId);
-                    contentResolver.delete(repeatUri, null, null);
-                    int countRepeat = contentResolver.bulkInsert(RoutineContract.RepeatEntry.CONTENT_URI, repeatValues);
-
-                    ContentValues[] todoValues = task.getTodoValues(newTaskId);
-                    Uri todoUri = RoutineContract.TaskEntry.getTodoUri(newTaskId);
-                    contentResolver.delete(todoUri, null, null);
-                    int countTodo = contentResolver.bulkInsert(RoutineContract.TodoEntry.CONTENT_URI, todoValues);
-
-                    Intent intent = new Intent(this, RoutineAlarm.class);
-                    intent.putExtra(RoutineAlarm.TYPE, RoutineAlarm.CHANGE);
-                    intent.putExtra(RoutineAlarm.TASK_ID, newTaskId);
-                    sendBroadcast(intent);
-
-                    success = true;
-                    Log.e(taskId == -1 ? "Saved" : "Update", newTaskId + "-" + dailyId + " " + countRepeat + "-" + countTodo);
+                    RoutineSyncAdapter.syncImmediately(this, false);
                     finish();
                 }
 
-                int msgId = success ? R.string.msg_save_task_successful : R.string.msg_could_not_save_task;
+                int msgId = newTaskId != -1 ? R.string.msg_save_task_successful : R.string.msg_could_not_save_task;
                 String message = getString(msgId);
                 CustomToast.makeToast(this, message);
 

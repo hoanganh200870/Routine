@@ -2,6 +2,11 @@ package vn.hcmut.routine.model;
 
 import android.content.ContentValues;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.hcmut.routine.database.RoutineContract;
@@ -14,6 +19,80 @@ public class TaskItem {
     public List<RepeatItem> repeat;
     public List<String> todo;
     public boolean enable;
+
+    public TaskItem(JSONObject data) {
+        try {
+            title = data.getString("title");
+            note = data.getString("note");
+            notify = data.getBoolean("notify");
+            JSONArray dailyArray = data.getJSONArray("daily");
+            int count = dailyArray.length();
+            daily = new boolean[count];
+            for (int i = 0; i < count; i++) {
+                daily[i] = dailyArray.getBoolean(0);
+            }
+
+            JSONArray repeatArray = data.getJSONArray("repeat");
+            repeat = new ArrayList<>();
+            for (int i = 0; i < repeatArray.length(); i++) {
+                JSONObject repeatItem = repeatArray.getJSONObject(i);
+                repeat.add(new RepeatItem(repeatItem));
+            }
+
+            JSONArray todoArray = data.getJSONArray("todo");
+            todo = new ArrayList<>();
+            for (int i = 0; i < todoArray.length(); i++) {
+                String todoItem = todoArray.getString(i);
+                todo.add(todoItem);
+            }
+
+            enable = data.getBoolean("enable");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static final String JSON_KEY_TITLE = "title";
+    public static final String JSON_KEY_NOTE = "note";
+    public static final String JSON_KEY_NOTIFY = "notify";
+    public static final String JSON_KEY_DAILY = "daily";
+    public static final String JSON_KEY_REPEAT = "repeat";
+    public static final String JSON_KEY_TODO = "todo";
+    public static final String JSON_KEY_ENABLE = "enable";
+
+    public JSONObject toJson() {
+        try {
+            JSONObject object = new JSONObject();
+            object.put(JSON_KEY_TITLE, title);
+            object.put(JSON_KEY_NOTE, note);
+            object.put(JSON_KEY_NOTIFY, notify);
+
+            JSONArray dailyArray = new JSONArray();
+            for (boolean dailyItem : daily) {
+                dailyArray.put(dailyItem);
+            }
+            object.put(JSON_KEY_DAILY, dailyArray);
+
+            JSONArray repeatArray = new JSONArray();
+            for (RepeatItem repeatItem : repeat) {
+                repeatArray.put(repeatItem.toJson());
+            }
+            object.put(JSON_KEY_REPEAT, repeatArray);
+
+            JSONArray todoArray = new JSONArray();
+            for (String todoItem : todo) {
+                todoArray.put(todoItem);
+            }
+            object.put(JSON_KEY_TODO, todoArray);
+
+            object.put(JSON_KEY_ENABLE, enable);
+            return object;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public TaskItem(String title, String note, boolean notify, boolean[] daily, List<RepeatItem> repeat, List<String> todo, boolean enable) {
         this.title = title;

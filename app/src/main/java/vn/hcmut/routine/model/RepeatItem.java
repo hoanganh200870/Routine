@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import vn.hcmut.routine.database.RoutineContract;
@@ -18,6 +21,47 @@ public class RepeatItem implements Comparable<RepeatItem>, Parcelable {
         }
 
         return time.compareTo(start) == 0;
+    }
+
+    public RepeatItem(JSONObject data) {
+        try {
+            String start = data.getString(JSON_KEY_START);
+            this.start = new TimeItem(start);
+
+            if (data.has(JSON_KEY_FINISH)) {
+                String finish = data.getString(JSON_KEY_FINISH);
+                this.finish = new TimeItem(finish);
+            }
+
+            if (data.has(JSON_KEY_INTERVAL)) {
+                String interval = data.getString(JSON_KEY_INTERVAL);
+                this.interval = new TimeItem(interval);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static final String JSON_KEY_START = "start";
+    public static final String JSON_KEY_FINISH = "finish";
+    public static final String JSON_KEY_INTERVAL = "interval";
+
+    public JSONObject toJson() {
+        try {
+            JSONObject object = new JSONObject();
+            object.put(JSON_KEY_START, start.toString());
+            if (finish != null) {
+                object.put(JSON_KEY_FINISH, finish.toString());
+            }
+            if (interval != null) {
+                object.put(JSON_KEY_INTERVAL, interval.toString());
+            }
+            return object;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public RepeatItem(TimeItem start, TimeItem finish, TimeItem interval) {

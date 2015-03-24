@@ -76,6 +76,7 @@ public class TaskAdapter extends CursorAdapter {
                 String where = RoutineContract.TaskEntry._ID + " = ? ";
                 String[] args = {String.valueOf(id)};
                 int update = contentResolver.update(uri, values, where, args);
+                RoutineSyncAdapter.syncImmediately(context, false);
                 Log.e("Toggle", id + " " + isChecked + " " + update);
             }
         });
@@ -104,6 +105,8 @@ public class TaskAdapter extends CursorAdapter {
                                 ContentResolver contentResolver = context.getContentResolver();
                                 Uri uri = RoutineContract.TaskEntry.getTaskUri(id);
                                 contentResolver.delete(uri, null, null);
+
+                                RoutineSyncAdapter.syncImmediately(context, false);
                             }
                         })
                         .setNegativeButton(cancel, new DialogInterface.OnClickListener() {

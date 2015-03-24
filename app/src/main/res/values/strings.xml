@@ -48,4 +48,11 @@
     <string name="cancel">Cancel</string>
     <string name="content_share">Download at: https://play.google.com/store/apps/details?id=vn.hcmut.routine</string>
     <string name="title_share">Routine application</string>
+    <string name="message_on_cant_connect_internet">Please check your internet connection, then open Routine again</string>
+    <string name="message_server_error">Server error, please restart Routine</string>
+
+    <string name="sync_account_type">routine.hcmut.vn</string>
+    <string name="content_authority">vn.hcmut.routine</string>
+    <string name="slogan1">Change your Routine</string>
+    <string name="slogan2">Change your Life</string>
 </resources>
